@@ -14,7 +14,7 @@ black = "*"
 django-extensions = "*"
 
 [requires]
-python_version = "3.7.4"
+python_version = "3.6.9"
 
 [scripts]
 server = "python manage.py runserver 0.0.0.0:80"

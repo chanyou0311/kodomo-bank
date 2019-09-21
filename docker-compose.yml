@@ -23,7 +23,6 @@ services:
     command: pipenv run python manage.py runserver 0:8000
     volumes:
       - ./:/code
-      - venv_app:/code/.venv
     ports:
       - "8000:8000"
     links:
@@ -34,6 +33,3 @@ services:
       MYSQL_HOST: db
       MYSQL_PORT: 3306
       IS_DEBUG: "True"
-volumes:
-  venv_app:
-    driver: "local"

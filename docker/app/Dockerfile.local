@@ -1,8 +1,4 @@
-FROM python:3.7.4
-
-
-# 仮想環境を /code/.venv に指定する
-ENV PIPENV_VENV_IN_PROJECT 1
+FROM python:3.6.9
 
 RUN mkdir /code/
 ADD Pipfile /code/
