@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = "pa=l+p+*nyn=4snalr)%akznfd5vse7asu_mizgd@=r%j3jz#*"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("IS_DEBUG") == "True"
 
 ALLOWED_HOSTS = ["*"]
 
@@ -111,7 +111,12 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
+STATIC_ROOT = "static/"
 
-STATIC_URL = "/static/"
+if DEBUG:
+    STATIC_URL = "/static/"
+else:
+    STATIC_URL = "https://storage.googleapis.com/iic-storage/static/"
+
 
 AUTH_USER_MODEL = "kodomo.User"
