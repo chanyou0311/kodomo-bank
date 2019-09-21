@@ -7,6 +7,13 @@ from django.core.mail import send_mail
 from django.contrib.auth.base_user import BaseUserManager
 
 
+class AbstractModel(models.Model):
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        abstract = True
+
 class UserManager(BaseUserManager):
     use_in_migrations = True
 
@@ -76,6 +83,8 @@ class User(AbstractBaseUser, PermissionsMixin):
         ),
     )
     date_joined = models.DateTimeField(_("date joined"), default=timezone.now)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     objects = UserManager()
 
@@ -106,3 +115,33 @@ class User(AbstractBaseUser, PermissionsMixin):
     def email_user(self, subject, message, from_email=None, **kwargs):
         """Send an email to this user."""
         send_mail(subject, message, from_email, [self.email], **kwargs)
+
+
+class Action(AbstractModel):
+    content = models.CharField(max_length=100)
+
+
+class Bank(AbstractModel):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    balance = models.IntegerField()
+
+
+class Log(AbstractModel):
+    difference = models.IntegerField()
+    action = models.ForeignKey(Action, on_delete=models.CASCADE)
+    bank = models.ForeignKey(Bank, on_delete=models.CASCADE)
+
+
+class Price(AbstractModel):
+    price = models.PositiveIntegerField()
+
+
+class Color(AbstractModel):
+    color = models.CharField(max_length=100)
+
+
+class Ticket(AbstractModel):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    price = models.ForeignKey(Price, on_delete=models.CASCADE)
+    color = models.ForeignKey(Color, on_delete=models.CASCADE)
+    is_active = models.BooleanField(default=True)
