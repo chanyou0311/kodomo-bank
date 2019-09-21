@@ -1,0 +1,126 @@
+body{
+    font-family: "Hiragino Kaku Gothic Pro", Verdana, Arial, Helvetica, "ヒラギノ角ゴ Pro W3", "Osaka", "ＭＳ Ｐゴシック";
+    font-size: 15px;
+}
+h1{
+    font-size: 22px;
+    margin-top: 39px;
+    margin-bottom: 50px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #BAA49E;
+    text-align: center;
+
+}
+body{
+    /* text-align: center; */
+    margin: 0 auto;
+    color: #E33C0B;
+}
+p{
+    margin: 0;
+}
+
+.textform p{
+    font-size: 20px;
+}
+.wrapper{
+    width: 340px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.center{
+    text-align: center;
+}
+
+ul{
+    display: inline;
+}
+
+li{
+    display: inline-block;
+    margin:0 10px;
+}
+
+body a{
+    color: #E33C0B;
+}
+
+body a:hover{
+    color: #E33C0B;
+}
+
+footer{
+    background-color: #FFFAED;
+    height: 78px;
+}
+
+footer li{
+    font-size: 15px;
+    margin-top: 19px;
+}
+.mb30{
+    margin-bottom: 30px;
+}
+table {
+    border: none;
+    text-align: left;
+}
+th{
+    border-bottom: 1px solid #BAA49E;
+}
+table td {
+border: none;
+padding: 15px 7px;
+}
+.used{
+    color:#BAA49E;
+}
+.red{
+    color: #B40019;
+}
+.green{
+    color: #399D26;
+}
+.canBuy{
+    display: block;
+    background-color: #E33C0B;
+    color: #ffffff;
+    font-weight: bold;
+    padding: 4px 15px;
+    border-radius: 4px;
+}
+.cannotBuy{
+    color: #BAA49E;
+}
+.text-L{
+    font-size: 40px;
+    font-weight: bold;
+}
+.text-LL{
+    font-size: 60px;
+    font-weight: bold;
+}
+.btn-go{
+    background-color: #E33C0B;
+    color: #ffffff;
+    font-weight: bold;
+    padding: 20px 15px;
+    border-radius: 4px;
+    width: 80%;
+    font-size: 20px;
+}
+.btn-back{
+    background-color: #BAA49E;
+    color: #ffffff;
+    font-weight: bold;
+    padding: 20px 15px;
+    border-radius: 4px;
+    width: 80%;
+    font-size: 20px;
+}
+.info-box{
+    background-color: #FFFAED;
+    padding-top: 30px;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+}
