@@ -1,0 +1,39 @@
+version: "2"
+
+services:
+  db:
+    build:
+      context: ./docker/db
+      dockerfile: ./Dockerfile.local
+    environment:
+      MYSQL_DATABASE: kodomo
+      MYSQL_USER: homepage
+      MYSQL_ROOT_PASSWORD: homepage
+      MYSQL_PASSWORD: homepage
+      MYSQL_HOST: db
+      MYSQL_PORT: 3306
+    volumes:
+      - ./sql:/docker-entrypoint-initdb.d
+    ports:
+      - "3306:3306"
+  app:
+    build:
+      context: .
+      dockerfile: ./docker/app/Dockerfile.local
+    command: pipenv run python manage.py runserver 0:8000
+    volumes:
+      - ./:/code
+      - venv_app:/code/.venv
+    ports:
+      - "8000:8000"
+    links:
+      - "db"
+    environment:
+      MYSQL_PASSWORD: homepage
+      MYSQL_USER: homepage
+      MYSQL_HOST: db
+      MYSQL_PORT: 3306
+      IS_DEBUG: "True"
+volumes:
+  venv_app:
+    driver: "local"

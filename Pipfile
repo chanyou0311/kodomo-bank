@@ -1,0 +1,24 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+
+[dev-packages]
+flake8 = "*"
+mypy = "*"
+black = "*"
+django-extensions = "*"
+
+[requires]
+python_version = "3.7.4"
+
+[scripts]
+server = "python manage.py runserver 0.0.0.0:80"
+test = "python manage.py test --noinput"
+auto_test = "watchmedo shell-command --recursive --patterns '*.py;*.png;*.jpg;*.gif;*.html;*.css;*.js' --command 'python manage.py test --noinput' ./"
+
+[pipenv]
+# black で必要
+allow_prereleases = true
