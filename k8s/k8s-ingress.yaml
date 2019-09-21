@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: kodomo-bank-ingress
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: kodomo-bank-ip
+    kubernetes.io/ingress.class: gce
+    kubernetes.io/tls-acme: "true"
+spec:
+  rules:
+    - host: kodomo-bank.oyuzuri.site
+      http:
+        paths:
+          - backend:
+              serviceName: kodomo-bank-service-app
+              servicePort: 8000
+  tls:
+    - hosts:
+        - kodomo-bank.oyuzuri.site
+      secretName: kodomo-bank-tls

@@ -1,0 +1,31 @@
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Issuer
+metadata:
+  name: kodomo-bank-issuer
+  namespace: default
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: chanyou0311@gmail.com
+    privateKeySecretRef:
+      name: letsencrypt
+    http01: {}
+---
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: kodomo-bank-certificate
+  namespace: default
+spec:
+  secretName: kodomo-bank-tls
+  issuerRef:
+    name: kodomo-bank-issuer
+  commonName: kodomo-bank.oyuzuri.site
+  dnsNames:
+    - kodomo-bank.oyuzuri.site
+  acme:
+    config:
+      - http01:
+          ingress: kodomo-bank-ingress
+        domains:
+          - kodomo-bank.oyuzuri.site
