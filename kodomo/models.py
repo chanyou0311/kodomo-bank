@@ -14,6 +14,7 @@ class AbstractModel(models.Model):
     class Meta:
         abstract = True
 
+
 class UserManager(BaseUserManager):
     use_in_migrations = True
 
@@ -120,10 +121,16 @@ class User(AbstractBaseUser, PermissionsMixin):
 class Action(AbstractModel):
     content = models.CharField(max_length=100)
 
+    def __str__(self):
+        return self.content
+
 
 class Bank(AbstractModel):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     balance = models.IntegerField()
+
+    def __str__(self):
+        return str(self.balance)
 
 
 class Log(AbstractModel):
@@ -131,15 +138,23 @@ class Log(AbstractModel):
     action = models.ForeignKey(Action, on_delete=models.CASCADE)
     bank = models.ForeignKey(Bank, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return str(self.difference)
+
 
 class Style(AbstractModel):
     color = models.CharField(max_length=100)
     icon = models.CharField(max_length=100)
 
+    def __str__(self):
+        return f"{self.color} {self.icon}"
 
 class Value(AbstractModel):
     price = models.PositiveIntegerField()
     cost = models.PositiveIntegerField()
+
+    def __str__(self):
+        return str(self.price)
 
 
 class Ticket(AbstractModel):
@@ -147,3 +162,6 @@ class Ticket(AbstractModel):
     value = models.ForeignKey(Value, on_delete=models.CASCADE)
     style = models.ForeignKey(Style, on_delete=models.CASCADE)
     is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f"{self.value.price円券}"
