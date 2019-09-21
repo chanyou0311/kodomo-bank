@@ -4,6 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+PyMySQL = "==0.9.3"
 
 [dev-packages]
 flake8 = "*"
