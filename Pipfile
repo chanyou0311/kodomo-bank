@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 PyMySQL = "==0.9.3"
+django = "==2.2.5"
 
 [dev-packages]
 flake8 = "*"
