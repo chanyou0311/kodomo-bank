@@ -1,5 +1,5 @@
 # TODO: 重複の整理
-
+.gcp_keys/
 *.pyc
 *.swo
 *.swp

@@ -1,0 +1,8 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: kodomo-bank-ingress
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: kodomo-bank-ip
+  labels:
+    app: app

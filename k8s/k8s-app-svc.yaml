@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: kodomo-bank-service-app
+spec:
+  selector:
+    app: kodomo-bank
+    tier: app
+  ports:
+    - protocol: TCP
+      port: 8000
+      name: app
+  type: NodePort

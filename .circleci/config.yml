@@ -1,0 +1,139 @@
+version: 2
+jobs:
+  test:
+    machine:
+      docker_layer_caching: true
+    steps:
+      - checkout
+      - run:
+          name: make env file for circleci
+          command: echo $env_circleci | base64 --decode > .env
+      - run:
+          name: setup dockerize
+          command: bash .circleci/setup-dockerize.sh
+      - run:
+          name: docker-compose build
+          command: docker-compose build
+      - run:
+          name: start up
+          command: docker-compose up -d
+      - run:
+          name: waiting launch db
+          command: dockerize -wait tcp://127.0.0.1:3306 -timeout 60s
+      - run:
+          name: install dev packages
+          command: docker-compose exec app pipenv install --dev
+      - run:
+          name: app run test
+          command: docker-compose exec app pipenv run test
+  build:
+    docker:
+      - image: google/cloud-sdk
+    environment:
+      GCP_PROJECT: kodomo-bank-253612
+      IMAGE_NAME_APP: kodomo_bank_app
+      BUCKET_NAME: kodomo-bank-storage
+      MYSQL_PASSWORD: homepage
+      MYSQL_USER: homepage
+      MYSQL_PORT: 3306
+      MYSQL_HOST: 127.0.0.1
+      PIPENV_DONT_LOAD_ENV: 1
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 18.05.0-ce
+      - run:
+          name: make env file for circleci
+          command: echo $env_circleci | base64 --decode > .env
+      - run:
+          name: gcloud auth
+          command: |
+            echo $GCLOUD_SERVICE_KEY | base64 --decode > ${HOME}/gcloud-service-key.json
+            gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
+            gcloud --quiet auth configure-docker
+      - run:
+          name: docker build app
+          command: |
+            docker build -t asia.gcr.io/${GCP_PROJECT}/${IMAGE_NAME_APP}:${CIRCLE_BUILD_NUM} -f ./docker/app/Dockerfile .
+            docker tag asia.gcr.io/${GCP_PROJECT}/${IMAGE_NAME_APP}:${CIRCLE_BUILD_NUM} asia.gcr.io/${GCP_PROJECT}/${IMAGE_NAME_APP}:latest
+            if [ -n "${CIRCLE_TAG}" ]; then
+              docker tag asia.gcr.io/${GCP_PROJECT}/${IMAGE_NAME_APP}:${CIRCLE_BUILD_NUM} asia.gcr.io/${GCP_PROJECT}/${IMAGE_NAME_APP}:${CIRCLE_TAG}
+            fi
+      - run:
+          name: docker push app
+          command: docker push asia.gcr.io/${GCP_PROJECT}/${IMAGE_NAME_APP}
+      - run:
+          name: collectstatic & upload to bucket app
+          command: |
+            docker run --name collectstatic -itd asia.gcr.io/${GCP_PROJECT}/${IMAGE_NAME_APP} bash
+            docker cp .env collectstatic:/code/.env
+            docker exec collectstatic pipenv run python manage.py collectstatic
+            docker cp collectstatic:/code/static ./static
+            gsutil -m rsync -d -r static/ gs://${BUCKET_NAME}/static
+  deploy:
+    docker:
+      - image: google/cloud-sdk
+    environment:
+      GCP_PROJECT: kodomo-bank-253612
+      CLUSTER_NAME: kodomo-bank
+      IMAGE_NAME_APP: kodomo_bank_app
+      ZONE_NAME: us-west1-a
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 18.05.0-ce
+      - run:
+          name: make env file for prod
+          command: echo $env_prod | base64 --decode > .env
+      - run:
+          name: gcloud auth
+          command: |
+            echo $GCLOUD_SERVICE_KEY | base64 --decode > ${HOME}/gcloud-service-key.json
+            gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
+            gcloud --quiet auth configure-docker
+      - run:
+          name: kubectl setting
+          command: gcloud container clusters get-credentials $CLUSTER_NAME --zone $ZONE_NAME --project $GCP_PROJECT
+      - run:
+          name: apply deployment
+          command: sh k8s-apply.sh
+      - run:
+          name: wait applying deployment
+          command: sh k8s-status.sh
+      - run:
+          name: restart deployment
+          command: sh k8s-refresh.sh
+      - run:
+          name: database migrate
+          command: |
+            branch=$CIRCLE_BRANCH
+            diff=$(git diff --name-only origin/master^ ${branch})
+            if [[ "${diff}" =~ migrations/ ]]; then
+              sh k8s-status.sh
+              POD_NAME=$(kubectl get pods --field-selector=status.phase=Running --sort-by=.metadata.creationTimestamp -l tier=app | sed -n 2p | awk '{print $1}')
+              while ! kubectl exec $POD_NAME -c cloudsql-proxy -- nc -z localhost 3306; do
+                sleep 0.5
+                POD_NAME=$(kubectl get pods --field-selector=status.phase=Running --sort-by=.metadata.creationTimestamp -l tier=app | sed -n 2p | awk '{print $1}')
+              done
+              echo "Connection success"
+              echo $POD_NAME
+              kubectl exec $POD_NAME -c app -- pipenv run python manage.py migrate --noinput --verbosity 2
+            else
+              echo "No change migration files."
+            fi
+workflows:
+  version: 2
+  test_and_deploy:
+    jobs:
+      - test
+      - build:
+          filters:
+            branches:
+              only: master
+      - deploy:
+          filters:
+            branches:
+              only: master
+          requires:
+            - test
+            - build

@@ -1,0 +1,18 @@
+[
+  {
+    "origin": [
+      "http://localhost:8000",
+      "https://localhost:8000",
+      "http://34.102.158.218",
+      "https://34.102.158.218"
+    ],
+    "responseHeader": [
+      "Content-Type",
+      "Accept",
+      "X-Requested-With",
+      "Access-Control-Allow-Credentials"
+    ],
+    "method": ["GET", "OPTIONS"],
+    "maxAgeSeconds": 60
+  }
+]
