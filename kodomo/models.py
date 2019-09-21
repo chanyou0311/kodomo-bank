@@ -132,16 +132,18 @@ class Log(AbstractModel):
     bank = models.ForeignKey(Bank, on_delete=models.CASCADE)
 
 
-class Price(AbstractModel):
-    price = models.PositiveIntegerField()
-
-
-class Color(AbstractModel):
+class Style(AbstractModel):
     color = models.CharField(max_length=100)
+    icon = models.CharField(max_length=100)
+
+
+class Value(AbstractModel):
+    price = models.PositiveIntegerField()
+    cost = models.PositiveIntegerField()
 
 
 class Ticket(AbstractModel):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    price = models.ForeignKey(Price, on_delete=models.CASCADE)
-    color = models.ForeignKey(Color, on_delete=models.CASCADE)
+    value = models.ForeignKey(Value, on_delete=models.CASCADE)
+    style = models.ForeignKey(Style, on_delete=models.CASCADE)
     is_active = models.BooleanField(default=True)
