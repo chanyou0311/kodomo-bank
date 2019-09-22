@@ -1,9 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, reverse
 from django.views.generic import TemplateView, ListView, DetailView, FormView
 from django.http.response import JsonResponse
 from django.urls import reverse_lazy
 
-from .models import Ticket, Bank, User
+from .models import Ticket, Bank, User, Style, Value
 from .forms import QRCodeForm
 
 
@@ -38,7 +38,8 @@ class UseDoneTicketView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["latest_ticket"] = Ticket.objects.last()
+        ticket = Ticket.objects.filter(is_active=False).last()
+        context["latest_ticket"] = ticket
         context["user"] = User.objects.first()
         return context
 
@@ -54,6 +55,15 @@ class BuyTicketView(TemplateView):
 class BuyAskTicketView(TemplateView):
     template_name = "kodomo/tickets/buy_ask.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["user"] = User.objects.first()
+        return context
+
+    def post(self, request, *args, **kwargs):
+        self.request["POST"]
+        return render(request, self.template_name)
+
 
 class BankDetailView(DetailView):
     template_name = "kodomo/banks/detail.html"
@@ -66,6 +76,17 @@ def bank_balance_api(request, pk):
     return JsonResponse(d)
 
 
-# class BankView(Detail):
-#     template_name = "kodomo/banks/detail.html"
+def tickets_buy_process(request, price):
+    user = User.objects.first()
+    value = Value.objects.filter(price=price).first()
+    if value is None:
+        value = Value.objects.create(price=price, cost=2)
+    style = Style.objects.first()
 
+    tickets = [Ticket(user=user, value=value, style=style) for i in range(10)]
+    Ticket.objects.bulk_create(tickets)
+
+    bank = Bank.objects.get(pk=1)
+    bank.balance = bank.balance - 20
+    bank.save()
+    return redirect(reverse("kodomo:tickets_list"))

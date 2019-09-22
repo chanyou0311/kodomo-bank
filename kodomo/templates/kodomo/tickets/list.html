@@ -9,7 +9,7 @@
   </tr>
   {% for object in object_list %}
   <tr>
-    <td><span style="color: {{ object.style.color }}"><i class="fas fa-{{ object.style.icon }}"></i></span>チケット1</td>
+    <td><span style="color: {{ object.style.color }}"><i class="fas fa-{{ object.style.icon }}"></i></span>チケット{{object.pk}}</td>
     <td>{{ object.value.price }}円</td>
     {% if object.is_active %}
     <td>未使用</td>

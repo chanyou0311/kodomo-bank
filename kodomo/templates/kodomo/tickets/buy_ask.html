@@ -5,15 +5,15 @@
 {% block content %}
 <h1>券を買う</h1>
 <div class="wrapper center">
-  <p class="mb30">しょうくんのkodomo口座から<br><span class="text-LL">20円</span><br>を使って</p>
+  <p class="mb30">{{ user.username }}のkodomo口座から<br><span class="text-LL">20円</span><br>を使って</p>
   <p class="mb10"><img src="{% static 'images/ticket-10.png' %}" class="buy-done-ticket"> <span class="text-L">10枚</span></p>
   <p class="mb30">を買いますか？</p>
-  <form action="">
+  <form action="post">
     <p class="mb30">
-      <input type="submit" value="買う" class="btn-go">
+      <a href="{% url 'kodomo:tickets_buy_process' price %}" style="display: inline-block" class="btn-go">買う</a>
     </p>
     <p>
-      <input type="submit" value="戻る" class="btn-back">
+      <a href="{% url 'kodomo:tickets_buy' %}" style="display: inline-block" class="btn-back">戻る</a>
     </p>
   </form>
 </div>
