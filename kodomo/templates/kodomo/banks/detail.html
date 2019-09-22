@@ -1,12 +1,13 @@
+
 {% extends 'kodomo/base.html' %}
 {% load static %}
 
 {% block content %}
-<h1>しょうくんのkodomo口座</h1>
+<h1>{{ object.user.username }}のkodomo口座</h1>
 <div class="wrapper">
   <div class="center">
     <p>残高</p>
-    <p class="text-LL">100円</p>
+    <p class="text-LL">{{ object.balance }}円</p>
     {% comment %} <form action="#">
         <input type="submit" value="おこづかいをおろす" class="btn-go mb30">
     </form> {% endcomment %}
