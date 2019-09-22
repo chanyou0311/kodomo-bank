@@ -21,12 +21,15 @@ class UseTicketView(FormView):
     form_class = QRCodeForm
     success_url = reverse_lazy('kodomo:tickets_use_done')
 
-
     def form_valid(self, form):
         print("hogehoge")
         bank = Bank.objects.get(pk=1)
         bank.balance = bank.balance + 10
         bank.save()
+        ticket = Ticket.objects.filter(is_active=True).first()
+        if ticket is not None:
+            ticket.is_active = False
+            ticket.save()
         return super().form_valid(form)
 
 
