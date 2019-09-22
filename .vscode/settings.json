@@ -25,7 +25,7 @@
     "editor.formatOnType": true
   },
   "python.venvPath": ".venv",
-  "python.pythonPath": "${workspaceFolder}/.venv/bin/python",
+  "python.pythonPath": "/anaconda3/bin/python",
   "python.formatting.provider": "black",
   "python.linting.pylintEnabled": false,
   "python.linting.flake8Enabled": true,
