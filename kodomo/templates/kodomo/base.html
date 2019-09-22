@@ -1,0 +1,23 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+  </head>
+  <body>
+    <div class="wrapper">
+    {% block content %}{% endblock %}
+    </div>
+    <footer>
+      <ul>
+        <a href="#"><li>券を<br>みる</li></a>
+        <a href="#"><li>券を<br>つかう</li></a>
+        <a href="#"><li>kodomo<br>口座</li></a>
+        <a href="#"><li>券を<br>かいたす</li></a>
+      </ul>
+    </footer>
+  </body>
+</html>
