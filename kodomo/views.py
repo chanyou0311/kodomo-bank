@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView, ListView
+from django.views.generic import TemplateView, ListView, DetailView
 
 from .models import Ticket
 
@@ -21,6 +21,5 @@ class TicketListView(ListView):
 #     template_name = "kodomo/tickets/by.html"
 
 
-# class BankView(Detail):
-#     template_name = "kodomo/banks/detail.html"
-
+class BankDetailView(DetailView):
+    template_name = "kodomo/banks/detail.html"
