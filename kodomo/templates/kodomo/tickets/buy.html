@@ -1,0 +1,28 @@
+{% extends 'kodomo/base.html' %}
+{% load static %}
+
+{% block content %}
+<h1>券を買う</h1>
+<div class="wrapper">
+  <table>
+    <tr>
+      <td><img src="{% static 'images/ticket-10.png' %}"></td>
+      <td>×10枚</td>
+      <td>20円</td>
+      <td><a href="{% url 'kodomo:tickets_buy_ask' 10 %}"><span class="canBuy">買う</span></a></td>
+    </tr>
+    <tr>
+    <td><img src="{% static 'images/ticket-50.png' %}"></td>
+      <td>×10枚</td>
+      <td>100円</td>
+      <td><a href="{% url 'kodomo:tickets_buy_ask' 100 %}"><span class="canBuy">買う</span></a></td>
+    </tr>
+    <tr>
+      <td><img src="{% static 'images/ticket-100.png' %}"></td>
+      <td>×10枚</td>
+      <td>200円</td>
+      <td><span class="cannotBuy">たりんよ</span></td>
+    </tr>
+  </table>
+</div>
+{% endblock %}
