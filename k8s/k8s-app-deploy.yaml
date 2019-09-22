@@ -37,26 +37,26 @@ spec:
               mountPath: /code/kodomo-bank-storage.json
               subPath: kodomo-bank-storage.json
               readOnly: true
-        # - name: cloudsql-proxy
-        #   image: gcr.io/cloudsql-docker/gce-proxy:1.09
-        #   command:
-        #     [
-        #       "/cloud_sql_proxy",
-        #       "-instances=soc-db:us-central1:soc-db=tcp:3306",
-        #       "-credential_file=/secrets/cloudsql/credentials.json",
-        #     ]
-        #   resources:
-        #     requests:
-        #       cpu: 1m
-        #       memory: 5M
-        #   volumeMounts:
-        #     - name: kodomo-bank-cloudsql
-        #       mountPath: /secrets/cloudsql
-        #       readOnly: true
-        #     - name: ssl-certs
-        #       mountPath: /etc/ssl/certs
-        #     - name: cloudsql
-        #       mountPath: /cloudsql
+        - name: cloudsql-proxy
+          image: gcr.io/cloudsql-docker/gce-proxy:1.09
+          command:
+            [
+              "/cloud_sql_proxy",
+              "-instances=kodomo-bank-253612:us-central1:kodomo-bank=tcp:3306",
+              "-credential_file=/secrets/cloudsql/credentials.json",
+            ]
+          resources:
+            requests:
+              cpu: 1m
+              memory: 5M
+          volumeMounts:
+            - name: kodomo-bank-cloudsql
+              mountPath: /secrets/cloudsql
+              readOnly: true
+            - name: ssl-certs
+              mountPath: /etc/ssl/certs
+            - name: cloudsql
+              mountPath: /cloudsql
       volumes:
         - name: kodomo-bank-dotenv
           secret:
