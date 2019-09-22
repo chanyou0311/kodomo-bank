@@ -14,8 +14,11 @@ class TicketListView(ListView):
     model = Ticket
 
 
-# class UseTicketView(TemplateView):
-#     template_name = "kodomo/tickets/use.html"
+class UseTicketView(TemplateView):
+    template_name = "kodomo/tickets/use.html"
+
+class UseDoneTicketView(TemplateView):
+    template_name = "kodomo/tickets/use_done.html"
 
 
 class BuyTicketView(TemplateView):
