@@ -24,7 +24,7 @@ class UseTicketView(FormView):
     def form_valid(self, form):
         print("hogehoge")
         bank = Bank.objects.get(pk=1)
-        bank.balance = bank.balance - 10
+        bank.balance = bank.balance + 10
         bank.save()
         return super().form_valid(form)
 
