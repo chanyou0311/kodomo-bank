@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-PyMySQL = "==0.9.3"
+mysqlclient = "*"
 django = "==2.2.5"
 gunicorn = "==19.9.0"
 
@@ -12,6 +12,7 @@ gunicorn = "==19.9.0"
 flake8 = "*"
 mypy = "*"
 black = "*"
+
 django-extensions = "*"
 
 [requires]
