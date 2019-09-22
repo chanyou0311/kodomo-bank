@@ -5,10 +5,10 @@
 {% block content %}
 <h1>kodomo券を使う</h1>
 <div class="wrapper center">
-  <p class="mb30 text-M"><span class="green"><i class="fas fa-baseball-ball"></i></span>チケット8</p>
-  <p class="text-LL mb10">10円</p>
+  <p class="mb30 text-M"><span class="green"><i class="fas fa-baseball-ball"></i></span>チケット{{ latest_ticket.pk }}</p>
+  <p class="text-LL mb10">{{ latest_ticket.value }}円</p>
   <p class="mb30">を使いました！</p>
   <p><img src="{% static 'images/charin.png' %}" class="use-done-charin"></p>
-  <p class="cannotBuy text-M">しょうくんのkodomo口座に<br>10円が入金されました</p>
+  <p class="cannotBuy text-M">{{ user.username }}のkodomo口座に<br>{{ latest_ticket.value }}円が入金されました</p>
 </div>
 {% endblock %}

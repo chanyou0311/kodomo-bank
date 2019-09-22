@@ -3,7 +3,7 @@ from django.views.generic import TemplateView, ListView, DetailView, FormView
 from django.http.response import JsonResponse
 from django.urls import reverse_lazy
 
-from .models import Ticket, Bank
+from .models import Ticket, Bank, User
 from .forms import QRCodeForm
 
 
@@ -35,6 +35,12 @@ class UseTicketView(FormView):
 
 class UseDoneTicketView(TemplateView):
     template_name = "kodomo/tickets/use_done.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["latest_ticket"] = Ticket.objects.last()
+        context["user"] = User.objects.first()
+        return context
 
 
 class BuyTicketView(TemplateView):
