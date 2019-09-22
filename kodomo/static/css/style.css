@@ -1,0 +1,184 @@
+body{
+    font-family: "Hiragino Kaku Gothic Pro", Verdana, Arial, Helvetica, "ヒラギノ角ゴ Pro W3", "Osaka", "ＭＳ Ｐゴシック";
+    font-size: 15px;
+}
+h1{
+    font-size: 22px;
+    margin-top: 39px;
+    margin-bottom: 50px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #BAA49E;
+    text-align: center;
+
+}
+body{
+    /* text-align: center; */
+    margin: 0 auto;
+    color: #E33C0B;
+}
+p{
+    margin: 0;
+}
+
+.textform p{
+    font-size: 20px;
+}
+.wrapper{
+    width: 340px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.center{
+    text-align: center;
+}
+
+ul{
+    display: inline;
+}
+
+li{
+    display: inline-block;
+    margin:0 10px;
+}
+
+body a{
+    color: #E33C0B;
+}
+
+body a:hover{
+    color: #E33C0B;
+}
+
+footer{
+    background-color: #FFFAED;
+    height: 78px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+footer li{
+    font-size: 15px;
+    margin-top: 19px;
+}
+.mb30{
+    margin-bottom: 30px;
+}
+.mb10{
+    margin-bottom: 10px;
+}
+table {
+    border: none;
+    text-align: left;
+    width: 100%;
+}
+th{
+    border-bottom: 1px solid #e4e4e4;
+    padding-bottom: 12px;
+}
+table td {
+border: none;
+padding: 20px 7px 10px 7px;
+}
+.used{
+    color:#BAA49E;
+}
+.red{
+    color: #B40019;
+}
+.green{
+    color: #399D26;
+}
+.canBuy{
+    display: block;
+    background-color: #E33C0B;
+    color: #ffffff;
+    font-weight: bold;
+    padding: 4px 15px;
+    border-radius: 4px;
+}
+.cannotBuy{
+    color: #BAA49E;
+}
+.text-M{
+    font-size: 18px;
+}
+.text-L{
+    font-size: 40px;
+    font-weight: bold;
+}
+.text-LL{
+    font-size: 60px;
+    font-weight: bold;
+}
+.btn-go{
+    background-color: #E33C0B;
+    color: #ffffff;
+    font-weight: bold;
+    padding: 20px 15px;
+    border-radius: 4px;
+    width: 80%;
+    font-size: 20px;
+}
+.btn-back{
+    background-color: #BAA49E;
+    color: #ffffff;
+    font-weight: bold;
+    padding: 20px 15px;
+    border-radius: 4px;
+    width: 80%;
+    font-size: 20px;
+}
+.info-box{
+    background-color: #FFFAED;
+    padding-top: 30px;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+}
+.form-box{
+    width: 320px;
+    height: 40px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.home-logo{
+    width: 100%;
+    background-color: #E33C0B;
+    text-align: center;
+    padding: 32px 0px;
+    margin-bottom: 30px;
+}
+.dropmoney-yen{
+    text-align: right;
+    padding-right: 10px;
+    font-size: 18px;
+    margin-bottom: 40px;
+}
+.buy-done-ticket{
+    width: 150px;
+    height: auto;
+    margin-right: 10px;
+}
+
+/* ここからチャリーン画像のフェードイン */
+.use-done-charin{
+    width: 180px;
+    height: auto;
+    margin-bottom: 50px;
+    padding-top: 30px;
+    animation-name: fadein;
+    animation-duration: 0.4s;
+    animation-iteration-count:1;
+    animation-timing-function: ease-out;
+}
+@keyframes fadein {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* ここまでチャリーン画像のフェードイン */
