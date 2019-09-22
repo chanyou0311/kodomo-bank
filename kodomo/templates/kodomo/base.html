@@ -17,10 +17,10 @@
     </div>
     <footer>
       <ul>
-        <a href="#"><li>券を<br>みる</li></a>
-        <a href="#"><li>券を<br>つかう</li></a>
-        <a href="#"><li>kodomo<br>口座</li></a>
-        <a href="#"><li>券を<br>かいたす</li></a>
+        <a href="{% url 'kodomo:tickets_list' %}"><li>券を<br>みる</li></a>
+        <a href="{% url 'kodomo:tickets_use' %}"><li>券を<br>つかう</li></a>
+        <a href="{% url 'kodomo:banks_detail' 1 %}"><li>kodomo<br>口座</li></a>
+        <a href="{% url 'kodomo:tickets_buy' %}"><li>券を<br>かいたす</li></a>
       </ul>
     </footer>
   </body>
