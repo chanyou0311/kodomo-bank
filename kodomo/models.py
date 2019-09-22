@@ -164,4 +164,4 @@ class Ticket(AbstractModel):
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
-        return f"{self.value.price円券}"
+        return f"{self.value.price}円券"
