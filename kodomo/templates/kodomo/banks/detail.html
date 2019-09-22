@@ -1,0 +1,29 @@
+{% extends 'kodomo/base.html' %}
+{% load static %}
+
+{% block content %}
+<h1>しょうくんのkodomo口座</h1>
+<div class="wrapper">
+  <div class="center">
+    <p>残高</p>
+    <p class="text-LL">100円</p>
+    {% comment %} <form action="#">
+        <input type="submit" value="おこづかいをおろす" class="btn-go mb30">
+    </form> {% endcomment %}
+  </div>
+    <table>
+        <tr>
+          <th>入出金</th>
+          <th>日付</th>
+        </tr>
+        <tr>
+          <td>-10円</td>
+          <td>2019/9/21</td>
+        </tr>
+        <tr>
+          <td>+10円</td>
+          <td>2019/9/21</td>
+        </tr>
+    </table>
+</div>
+{% endblock %}
