@@ -2,5 +2,21 @@
 {% load static %}
 
 {% block content %}
-<p>hogehogehoge</p>
+<h1>券を見る</h1>
+<table>
+  <tr>
+    <th>チケット番号</th><th>金額</th><th>利用状況</th>
+  </tr>
+  {% for object in object_list %}
+  <tr>
+    <td><span style="color: {{ object.style.color }}"><i class="fas fa-{{ object.style.icon }}"></i></span>チケット1</td>
+    <td>{{ object.value.price }}円</td>
+    {% if object.is_active %}
+    <td>未使用</td>
+    {% else %}
+    <td><span class="used">使用済み</span></td>
+    {% endif %}
+  </tr>
+  {% endfor %}
+</table>
 {% endblock %}
