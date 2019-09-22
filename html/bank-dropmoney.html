@@ -2,23 +2,26 @@
 <html lang="ja">
   <head>
     <meta charset="utf-8">
-    <title>HTML</title>
+    <title>しょうくんのkodomo口座</title>
     <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body>
     <h1>しょうくんのkodomo口座</h1>
-    <p>おこづかいをおろす</p>
-    <p>残高</p>
-    <p>60円</p>
-    <input type="text" size="40">
-    <p>円</p>
-    <form action="#">
-      <p>
-        <input type="submit" value="おこづかいをおろす">
-      </p>
-      <p>
-        <input type="submit" value="キャンセル">
-      </p>
-    </form> 
+    <div class="wrapper center">
+      <p class="text-M mb30">おこづかいをおろす</p>
+      <p class="cannotBuy">残高</p>
+      <p class="text-LL mb30 cannotBuy">60円</p>
+      <p class="cannotBuy mb10">おろす金額を入力してください</p>
+      <input type="text" size="40" class="form-box mb10">
+      <p class="dropmoney-yen mb30">円</p>
+      <form action="#">
+        <p class="mb30">
+          <input type="submit" value="おこづかいをおろす" class="btn-go">
+        </p>
+        <p class="mb30">
+          <input type="submit" value="キャンセル"class="btn-back">
+        </p>
+      </form>
+    </div>
   </body>
 </html>

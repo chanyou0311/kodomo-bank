@@ -52,6 +52,9 @@ body a:hover{
 footer{
     background-color: #FFFAED;
     height: 78px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
 
 footer li{
@@ -61,16 +64,21 @@ footer li{
 .mb30{
     margin-bottom: 30px;
 }
+.mb10{
+    margin-bottom: 10px;
+}
 table {
     border: none;
     text-align: left;
+    width: 100%;
 }
 th{
-    border-bottom: 1px solid #BAA49E;
+    border-bottom: 1px solid #e4e4e4;
+    padding-bottom: 12px;
 }
 table td {
 border: none;
-padding: 15px 7px;
+padding: 20px 7px 10px 7px;
 }
 .used{
     color:#BAA49E;
@@ -91,6 +99,9 @@ padding: 15px 7px;
 }
 .cannotBuy{
     color: #BAA49E;
+}
+.text-M{
+    font-size: 18px;
 }
 .text-L{
     font-size: 40px;
@@ -124,3 +135,50 @@ padding: 15px 7px;
     padding-bottom: 20px;
     margin-bottom: 30px;
 }
+.form-box{
+    width: 320px;
+    height: 40px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.home-logo{
+    width: 100%;
+    background-color: #E33C0B;
+    text-align: center;
+    padding: 32px 0px;
+    margin-bottom: 30px;
+}
+.dropmoney-yen{
+    text-align: right;
+    padding-right: 10px;
+    font-size: 18px;
+    margin-bottom: 40px;
+}
+.buy-done-ticket{
+    width: 150px;
+    height: auto;
+    margin-right: 10px;
+}
+
+/* ここからチャリーン画像のフェードイン */
+.use-done-charin{
+    width: 180px;
+    height: auto;
+    margin-bottom: 50px;
+    padding-top: 30px;
+    animation-name: fadein;
+    animation-duration: 0.4s;
+    animation-iteration-count:1;
+    animation-timing-function: ease-out;
+}
+@keyframes fadein {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* ここまでチャリーン画像のフェードイン */
