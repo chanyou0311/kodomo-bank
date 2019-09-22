@@ -135,6 +135,34 @@ padding: 20px 7px 10px 7px;
     padding-bottom: 20px;
     margin-bottom: 30px;
 }
+.qrcode-text{
+    padding-right:1.7em; margin-right:0
+}
+.qrcode-text-btn{
+    display:inline-block; 
+    background:url(//dab1nmslvvntp.cloudfront.net/wp-content/uploads/2017/07/1499401426qr_icon.svg) 50% 50% no-repeat; 
+    height:1em; 
+    width:1.7em; 
+    margin-left:-1.7em; 
+    cursor:pointer
+}
+.qrcode-text-btn > input[type=file]{
+    position:absolute; 
+    overflow:hidden; 
+    width:1px; 
+    height:1px; 
+    opacity:0
+}
+.btn-login{
+    background-color: #E33C0B;
+    color: #ffffff;
+    font-weight: bold;
+    padding: 20px 15px;
+    border-radius: 4px;
+    margin-bottom: 70px;
+    width: 80%;
+    font-size: 20px;
+}
 .form-box{
     width: 320px;
     height: 40px;
