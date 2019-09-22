@@ -19,7 +19,8 @@ class TicketListView(ListView):
 class UseTicketView(FormView):
     template_name = "kodomo/tickets/use.html"
     form_class = QRCodeForm
-    success_url = reverse_lazy('kodomo:tickets_use')
+    success_url = reverse_lazy('kodomo:tickets_use_done')
+
 
     def form_valid(self, form):
         print("hogehoge")
